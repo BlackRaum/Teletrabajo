@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class TipoTeletrabajador
+    public class EquipoConexion
     {
-        public int idTipoTeletrabajador { get; set; }
         public String descripcion { get; set; }
-        public String otrosRequerimientos { get; set; }
+        public Boolean posee { get; set; }
 
-        public TipoTeletrabajador()
+        public EquipoConexion()
         {
 
         }

@@ -43,9 +43,12 @@
   <ItemGroup>
     <Compile Include="AspectoSeguridadLaboral.cs" />
     <Compile Include="Entregable.cs" />
+    <Compile Include="EquipoConexion.cs" />
     <Compile Include="EvaluacionAspectoSeguridad.cs" />
     <Compile Include="Funcionario.cs" />
+    <Compile Include="FuncionFuncionario.cs" />
     <Compile Include="Horario.cs" />
+    <Compile Include="Instrumentalizacion.cs" />
     <Compile Include="Meta.cs" />
     <Compile Include="PerfilLaboral.cs" />
     <Compile Include="PerfilPuesto.cs" />
@@ -53,6 +56,7 @@
     <Compile Include="PlanTrabajo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PuestoTeletrabajo.cs" />
+    <Compile Include="SolicitudTeletrabajo.cs" />
     <Compile Include="TipoDesplazamiento.cs" />
     <Compile Include="TipoTeletrabajador.cs" />
     <Compile Include="UnidadTrabajo.cs" />

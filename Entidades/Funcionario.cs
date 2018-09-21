@@ -32,5 +32,16 @@ namespace Entidades
         public PlanTrabajo planTrabajo { get; set; }
         public PerfilLaboral perfilLaboral { get; set; }
         public PerfilPuesto perfilPuesto { get; set; }
+
+        public Funcionario()
+        {
+            jefe = new Funcionario();
+            unidadTrabajo = new UnidadTrabajo();
+            contactoEmergencia = new PersonaEmergencia();
+            puestoTeletrabajo = new PuestoTeletrabajo();
+            planTrabajo = new PlanTrabajo();
+            perfilLaboral = new PerfilLaboral();
+            perfilPuesto = new PerfilPuesto();
+        }
     }
 }
