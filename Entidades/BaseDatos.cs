@@ -20,4 +20,4 @@ namespace Entidades
         public String contrasenaLogin { get; set; }
     }
 }
-}
+

@@ -50,16 +50,16 @@ namespace AccesoDatos
         /// Devuelve: Conexion de la BD SIBO
         /// </summary>
         /// <returns>SqlConnection</returns>
-        public SqlConnection conexionSIBO()
+        public SqlConnection conexionTeletrabajo()
         {
             baseDatos = archivo.leerArchivo();
             SqlConnection conn = new SqlConnection();
 
-            //baseDatos.servidorSIBO = "163.178.106.21";
-            //baseDatos.baseSIBO = "Inventario";
-            //baseDatos.usuarioSIBO = "sa";
-            //baseDatos.contrasenaSIBO = "sa123!!";
-            //archivo.guardarArchivo(baseDatos);
+            baseDatos.servidorTeletrabajo = "163.178.106.21";
+            baseDatos.baseTeletrabajo = "Teletrabajo";
+            baseDatos.usuarioTeletrabajo = "sa";
+            baseDatos.contrasenaTeletrabajo = "sa123!!";
+            archivo.guardarArchivo(baseDatos);
 
             String connectionString
                 = @"Data Source=" + baseDatos.servidorTeletrabajo

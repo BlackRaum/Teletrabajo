@@ -24,14 +24,16 @@ namespace AccesoDatos
         /// Devuelve: devuelve el objeto Persona de Emergencia
         /// </summary>
         /// <returns> PersonaEmergencia </returns>
-        public PersonaEmergencia getPersonaEmergencia()
+        public PersonaEmergencia getPersonaEmergencia(Funcionario funcionario)
         {
-            SqlConnection sqlconnection = conexion.conexionSIBO();
+            SqlConnection sqlconnection = conexion.conexionTeletrabajo();
             String consulta = @"SELECT id_persona, nombre_completo, telefono_fijo, telefono_celular, parentesco,direccion
                                               FROM dbo.PersonaEmergencia PE, dbo.ContactoEmergencia CE
-                                              WHERE PE.id_persona= CE.id_persona_emergencia and CE.id_funcionario = @id_funcionario";
+                                              WHERE PE.id_persona= CE.id_persona_emergencia and CE.id_funcionario = @id_funcionario and activo = @activo";
 
             SqlCommand sqlCommand = new SqlCommand(consulta, sqlconnection);
+            sqlCommand.Parameters.AddWithValue("@id_funcionario", funcionario.idFuncionario);
+            sqlCommand.Parameters.AddWithValue("@activo", true);
 
             SqlDataReader reader;
             sqlconnection.Open();
@@ -40,13 +42,12 @@ namespace AccesoDatos
             PersonaEmergencia personaEmergencia = new PersonaEmergencia();
             while (reader.Read())
             {
-
-                personaEmergencia.idPersona = Convert.ToInt16(reader["dias_habiles"].ToString());
-                personaEmergencia.nombreCompleto = reader["dias_habiles"].ToString();
-                personaEmergencia.telefonoFijo = reader["dias_habiles"].ToString();
-                personaEmergencia.celular = reader["dias_habiles"].ToString();
-                personaEmergencia.parentesco = reader["dias_habiles"].ToString();
-                personaEmergencia.direccion = reader["dias_habiles"].ToString();
+                personaEmergencia.idPersona = Convert.ToInt16(reader["id_persona"].ToString());
+                personaEmergencia.nombreCompleto = reader["nombre_completo"].ToString();
+                personaEmergencia.telefonoFijo = reader["telefono_fijo"].ToString();
+                personaEmergencia.celular = reader["telefono_celular"].ToString();
+                personaEmergencia.parentesco = reader["parentesco"].ToString();
+                personaEmergencia.direccion = reader["direccion"].ToString();
             }
 
             sqlconnection.Close();
@@ -65,7 +66,7 @@ namespace AccesoDatos
         /// <returns>int</returns>
         public int insertarPersonaEmergencia( PersonaEmergencia contactoEmergencia, Funcionario funcionario)
         {
-            SqlConnection sqlConnection = conexion.conexionSIBO();
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
 
             String consulta = @"INSERT INTO dbo.PersonaEmergencia
                                             (nombre_completo,telefono_fijo,telefono_celular,parentesco,direccion,activo)
@@ -109,7 +110,7 @@ namespace AccesoDatos
         /// <returns>int</returns>
         public int actualizarPersonaEmergencia(PersonaEmergencia contactoEmergencia, Funcionario funcionario)
         {
-            SqlConnection sqlConnection = conexion.conexionSIBO();
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
 
             String consulta = @"UPDATE dbo.ContactoEmergencia
                                              SET activo = @activo
@@ -134,7 +135,7 @@ namespace AccesoDatos
 
         /// Fabián Quirós Masís
         /// 26/09/2018
-        /// Efecto: actualiza la información de un contacto de emergencia de un funcionario 
+        /// Efecto: elimina la información de un contacto de emergencia de un funcionario 
         /// Requiere: PersonaEmergencia, Funcionario     
         /// Modifica:-
         /// Devuelve:int idContactoEmergencia
@@ -142,7 +143,7 @@ namespace AccesoDatos
         /// <returns>int</returns>
         public void eliminarPersonaEmergencia(PersonaEmergencia contactoEmergencia, Funcionario funcionario)
         {
-            SqlConnection sqlConnection = conexion.conexionSIBO();
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
 
             String consulta = @"UPDATE dbo.ContactoEmergencia
                                              SET activo = @activo

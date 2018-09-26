@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teletrabajo", "Teletrabajo\Teletrabajo.csproj", "{71421B1F-81E8-45F3-B35D-C5A63D8823DE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{ADFEACCE-F0B1-416B-8C77-9EDE6B932848}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoDatos", "AccesoDatos\AccesoDatos.csproj", "{89577135-3047-46D5-ADF0-4189085BD785}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicios", "Servicios\Servicios.csproj", "{594484CF-47F9-48FA-A9AE-AAB0DAC8B95B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teletrabajo", "Teletrabajo\Teletrabajo.csproj", "{71421B1F-81E8-45F3-B35D-C5A63D8823DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{71421B1F-81E8-45F3-B35D-C5A63D8823DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71421B1F-81E8-45F3-B35D-C5A63D8823DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71421B1F-81E8-45F3-B35D-C5A63D8823DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71421B1F-81E8-45F3-B35D-C5A63D8823DE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ADFEACCE-F0B1-416B-8C77-9EDE6B932848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ADFEACCE-F0B1-416B-8C77-9EDE6B932848}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADFEACCE-F0B1-416B-8C77-9EDE6B932848}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{594484CF-47F9-48FA-A9AE-AAB0DAC8B95B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{594484CF-47F9-48FA-A9AE-AAB0DAC8B95B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{594484CF-47F9-48FA-A9AE-AAB0DAC8B95B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71421B1F-81E8-45F3-B35D-C5A63D8823DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71421B1F-81E8-45F3-B35D-C5A63D8823DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71421B1F-81E8-45F3-B35D-C5A63D8823DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71421B1F-81E8-45F3-B35D-C5A63D8823DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

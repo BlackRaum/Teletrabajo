@@ -11,7 +11,7 @@ namespace Entidades
         public int idUnidad { get; set; }
         public String nombre { get; set; }
         public String numeroExtension { get; set; }
-        public String telegono { get; set; }
+        public String telefono { get; set; }
         public String direccion { get; set; }
 
         public UnidadTrabajo() { }

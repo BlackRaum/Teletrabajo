@@ -8,6 +8,10 @@ namespace AccesoDatos
 {
     public class SolicitudTeletrabajoDatos
     {
+        #region Variables globales
+        private ConexionDatos conexion = new ConexionDatos();
+        private BitacoraAccionesDatos bitacora = new BitacoraAccionesDatos();
+        #endregion
 
     }
 }
