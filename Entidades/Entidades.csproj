@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Archivo.cs" />
     <Compile Include="AspectoSeguridadLaboral.cs" />
+    <Compile Include="BaseDatos.cs" />
     <Compile Include="Entregable.cs" />
     <Compile Include="EquipoConexion.cs" />
     <Compile Include="EvaluacionAspectoSeguridad.cs" />
