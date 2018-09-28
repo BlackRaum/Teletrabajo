@@ -24,6 +24,44 @@ namespace AccesoDatos
         /// Devuelve: lista de Aspectos de Seguridad Laboral
         /// </summary>
         /// <returns> List<AspectoSeguridadLaboral> </returns>
+        public AspectoSeguridadLaboral getAspectoSeguridadLaboral(int idAspecto)
+        {
+            SqlConnection sqlconnection = conexion.conexionTeletrabajo();
+
+           
+            String consulta = @"SELECT id_aspecto,descripcion 
+                                            FROM Teletrabajo.dbo.AspectoSeguridadLaboral
+                                            Where id_aspecto=@id_aspecto activo = @activo";
+
+            SqlCommand sqlCommand = new SqlCommand(consulta, sqlconnection);
+            sqlCommand.Parameters.AddWithValue("@id_aspecto", idAspecto);
+            sqlCommand.Parameters.AddWithValue("@activo", true);
+
+            SqlDataReader reader;
+            sqlconnection.Open();
+            reader = sqlCommand.ExecuteReader();
+
+            AspectoSeguridadLaboral aspectoSeguridad = new AspectoSeguridadLaboral();
+            while (reader.Read())
+            {                           
+                aspectoSeguridad.idAspecto = Convert.ToInt16(reader["id_aspecto"].ToString());
+                aspectoSeguridad.descripcion = reader["descripcion"].ToString();                   
+            }
+
+            sqlconnection.Close();
+
+            return aspectoSeguridad;
+        }
+
+        /// <summary>
+        /// Fabián Quirós Masís
+        /// 24/09/2018
+        /// Efecto: devuelve una lista de Aspectos de Seguridad Laboral 
+        /// Requiere: -
+        /// Modifica: -
+        /// Devuelve: lista de Aspectos de Seguridad Laboral
+        /// </summary>
+        /// <returns> List<AspectoSeguridadLaboral> </returns>
         public List<AspectoSeguridadLaboral> getAspectosSeguridadLaboral()
         {
             SqlConnection sqlconnection = conexion.conexionTeletrabajo();
@@ -54,6 +92,93 @@ namespace AccesoDatos
             sqlconnection.Close();
 
             return listaAspectos;
+        }
+
+        /// <summary>
+        /// Fabián Quirós Masís
+        /// 26/09/2018
+        /// Efecto: inserta un aspecto de seguridad laboral en la bd
+        /// Requiere: AspectoSeguridadLaboral     
+        /// Modifica:-
+        /// Devuelve:int idAspecto
+        /// </summary>
+        /// <returns>int</returns>
+        public int insertarAspectoSeguridadLaboral( AspectoSeguridadLaboral aspecto )
+        {
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
+
+            String consulta = @"INSERT INTO dbo.AspectoSeguridadLaboral
+                                            (descripcion,activo)
+                                             VALUES(@descripcion,@activo)
+                                            SELECT SCOPE_IDENTITY();";
+            SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@descripcion", aspecto.descripcion);
+            sqlCommand.Parameters.AddWithValue("@activo", true);
+
+            sqlConnection.Open();
+            int idAspecto= Convert.ToInt32(sqlCommand.ExecuteScalar());
+
+            sqlConnection.Close();
+
+            return idAspecto;
+        }
+
+        /// <summary>
+        /// Fabián Quirós Masís
+        /// 26/09/2018
+        /// Efecto: actualiza la información de un aspecto de seguridad laboral 
+        /// Requiere: AspectoSeguridadLaboral
+        /// Modifica:-
+        /// Devuelve: int idAspecto
+        /// </summary>
+        /// <returns>int</returns>
+        public int actualizarAspectoSeguridadLaboral(AspectoSeguridadLaboral aspecto)
+        {
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
+
+            String consulta = @"UPDATE dbo.AspectoSeguridadLaboral
+                                            SET activo = @activo 
+                                            WHERE id_aspecto = @id_aspecto";
+            SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@id_aspecto", aspecto.idAspecto);           
+            sqlCommand.Parameters.AddWithValue("@activo", false);
+
+            sqlConnection.Open();
+            sqlCommand.ExecuteReader();
+            sqlConnection.Close();
+
+            int idAspecto = insertarAspectoSeguridadLaboral(aspecto);
+
+            return idAspecto;
+        }
+
+        /// Fabián Quirós Masís
+        /// 26/09/2018
+        /// Efecto: elimina la información de un aspecto de seguridad laboral
+        /// Requiere: AspectoSeguridadLaboral, Funcionario     
+        /// Modifica:-
+        /// Devuelve:int idContactoEmergencia
+        /// </summary>
+        /// <returns>-</returns>
+        public void eliminarAspectoSeguridadLaboral(AspectoSeguridadLaboral aspecto, Funcionario funcionario)
+        {
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
+
+            String consulta = @"UPDATE dbo.AspectoSeguridadLaboral
+                                            SET activo = @activo 
+                                            WHERE id_aspecto = @id_aspecto";
+            SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@id_aspecto", aspecto.idAspecto);
+            sqlCommand.Parameters.AddWithValue("@activo", false);
+
+            sqlConnection.Open();
+            sqlCommand.ExecuteReader();
+            sqlConnection.Close();
+
+            bitacora.insertarBitacoraAccion("Eliminar", "ContactoEmergencia", aspecto.idAspecto, 0, funcionario.nombreCompleto);
         }
     }
 }

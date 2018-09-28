@@ -18,13 +18,50 @@ namespace AccesoDatos
         /// <summary>
         /// Fabián Quirós Masís
         /// 26/09/2018
-        /// Efecto: inserta un contacto de emergencia de un funcionario
+        /// Efecto: obtiene una unidad de trabajo por id
+        /// Requiere: Id unidad de trabajo 
+        /// Modifica:-
+        /// Devuelve: Unidad de trabajo
+        /// </summary>
+        /// <returns>UnidadTrabajo</returns>
+        public UnidadTrabajo getUnidadTrabajo(int idUnidad)
+        {
+         
+            SqlConnection sqlConnection = conexion.conexionLogin();
+            String consulta = @"SELECT id_unidad,nombre,numero_extension,telefono,direccion
+                                             FROM dbo.UnidadTrabajo
+                                             Where id_unidad = @id_unidad activo = @activo";
+
+            SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@id_unidad", true);
+            sqlCommand.Parameters.AddWithValue("@activo", true);
+
+            SqlDataReader reader;
+            sqlConnection.Open();
+            reader = sqlCommand.ExecuteReader();
+            UnidadTrabajo unidad = new UnidadTrabajo();
+            while (reader.Read())
+            {
+                unidad.idUnidad = Convert.ToInt16(reader["id_unidad"].ToString());
+                unidad.nombre = reader["nombre"].ToString();
+                unidad.numeroExtension = reader["numero_extension"].ToString();
+                unidad.telefono = reader["telefono"].ToString();
+                unidad.direccion = reader["direccion"].ToString();                            
+            }
+
+            return unidad;
+        }
+
+        /// <summary>
+        /// Fabián Quirós Masís
+        /// 26/09/2018
+        /// Efecto: obtiene todas las unidades de la base datos.
         /// Requiere: PersonaEmergencia, Funcionario     
         /// Modifica:-
-        /// Devuelve:int idContactoEmergencia
+        /// Devuelve: Lista de UnidadTrabajo
         /// </summary>
-        /// <returns>int</returns>
-        public List<UnidadTrabajo> getUnidadTrabajo()
+        /// <returns>List<UnidadTrabajo></returns>
+        public List<UnidadTrabajo> getUnidadesTrabajo()
         {
             List<UnidadTrabajo> unidadesTrabajo = new List<UnidadTrabajo>();
 

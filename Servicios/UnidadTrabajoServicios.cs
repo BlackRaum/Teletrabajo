@@ -11,21 +11,35 @@ namespace Servicios
     public class UnidadTrabajoServicios
     {
         #region
-        UnidadTrabajoDatos unidadtrabajoDatos = new UnidadTrabajoDatos();
+        UnidadTrabajoDatos unidadTrabajoDatos = new UnidadTrabajoDatos();
         #endregion
 
         /// <summary>
         /// Fabián Quirós Masís
         /// 26/09/2018
-        /// Efecto: inserta un contacto de emergencia de un funcionario
+        /// Efecto: obtiene una unidad de trabajo por id
+        /// Requiere: Id unidad de trabajo 
+        /// Modifica:-
+        /// Devuelve: Unidad de trabajo
+        /// </summary>
+        /// <returns>UnidadTrabajo</returns>
+        public UnidadTrabajo getUnidadTrabajo(int idUnidad)
+        {
+            return unidadTrabajoDatos.getUnidadTrabajo(idUnidad);
+        }
+
+        /// <summary>
+        /// Fabián Quirós Masís
+        /// 26/09/2018
+        /// Efecto: obtiene todas las unidades de la base datos.
         /// Requiere: PersonaEmergencia, Funcionario     
         /// Modifica:-
-        /// Devuelve:int idContactoEmergencia
+        /// Devuelve: Lista de UnidadTrabajo
         /// </summary>
-        /// <returns>int</returns>
-        public List<UnidadTrabajo> getUnidadTrabajo()
+        /// <returns>List<UnidadTrabajo></returns>
+        public List<UnidadTrabajo> getUnidadesTrabajo()
         {
-            return unidadtrabajoDatos.getUnidadTrabajo();
+            return unidadTrabajoDatos.getUnidadesTrabajo();
         }
 
         /// <summary>
@@ -39,7 +53,7 @@ namespace Servicios
         /// <returns>int</returns>
         public int insertarUnidadTrabajo(UnidadTrabajo unidad)
         {
-            return unidadtrabajoDatos.insertarUnidadTrabajo(unidad);
+            return unidadTrabajoDatos.insertarUnidadTrabajo(unidad);
         }
 
         /// <summary>
@@ -53,7 +67,7 @@ namespace Servicios
         /// <returns>int</returns>
         public int actualizarUnidadTrabajo(UnidadTrabajo unidad)
         {
-           return unidadtrabajoDatos.actualizarUnidadTrabajo(unidad);
+            return unidadTrabajoDatos.actualizarUnidadTrabajo(unidad);
         }
 
         /// Fabián Quirós Masís
@@ -66,7 +80,7 @@ namespace Servicios
         /// <returns>int</returns>
         public void eliminarUnidadTrabajo(UnidadTrabajo unidad, Funcionario funcionario)
         {
-            unidadtrabajoDatos.eliminarUnidadTrabajo(unidad,funcionario);
+            unidadTrabajoDatos.eliminarUnidadTrabajo(unidad, funcionario);
         }
     }
 }

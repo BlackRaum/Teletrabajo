@@ -140,7 +140,7 @@ namespace AccesoDatos
         /// Modifica:-
         /// Devuelve:int idContactoEmergencia
         /// </summary>
-        /// <returns>int</returns>
+        /// <returns>-</returns>
         public void eliminarPersonaEmergencia(PersonaEmergencia contactoEmergencia, Funcionario funcionario)
         {
             SqlConnection sqlConnection = conexion.conexionTeletrabajo();
