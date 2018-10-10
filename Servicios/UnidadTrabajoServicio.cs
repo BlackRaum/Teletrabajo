@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Servicios
 {
-    public class UnidadTrabajoServicios
+    public class UnidadTrabajoServicio
     {
         #region
         UnidadTrabajoDatos unidadTrabajoDatos = new UnidadTrabajoDatos();
@@ -65,9 +65,9 @@ namespace Servicios
         /// Devuelve:int idContactoEmergencia
         /// </summary>
         /// <returns>int</returns>
-        public int actualizarUnidadTrabajo(UnidadTrabajo unidad)
+        public int actualizarUnidadTrabajo(UnidadTrabajo unidad, String usuario)
         {
-            return unidadTrabajoDatos.actualizarUnidadTrabajo(unidad);
+            return unidadTrabajoDatos.actualizarUnidadTrabajo(unidad, usuario);
         }
 
         /// Fabián Quirós Masís
@@ -78,9 +78,9 @@ namespace Servicios
         /// Devuelve:int idContactoEmergencia
         /// </summary>
         /// <returns>int</returns>
-        public void eliminarUnidadTrabajo(UnidadTrabajo unidad, Funcionario funcionario)
+        public void eliminarUnidadTrabajo(UnidadTrabajo unidad, String usuario)
         {
-            unidadTrabajoDatos.eliminarUnidadTrabajo(unidad, funcionario);
+            unidadTrabajoDatos.eliminarUnidadTrabajo(unidad, usuario);
         }
     }
 }

@@ -42,12 +42,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AspectoSeguridadLaboralServicio.cs" />
+    <Compile Include="EntregableServicio.cs" />
+    <Compile Include="EquipoConexionServicio.cs" />
+    <Compile Include="FuncionarioServicio.cs" />
+    <Compile Include="FuncionFuncionarioServicio.cs" />
+    <Compile Include="HorarioServicio.cs" />
+    <Compile Include="InstrumentalizacionServicio.cs" />
+    <Compile Include="MetaServicio.cs" />
+    <Compile Include="ObjetivoServicio.cs" />
     <Compile Include="PerfilLaboralServicio.cs" />
     <Compile Include="PerfilPuestoServicio.cs" />
     <Compile Include="PersonaEmergenciaServicio.cs" />
+    <Compile Include="PlanTrabajoServicio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PuestoTeletrabajoServicio.cs" />
-    <Compile Include="UnidadTrabajoServicios.cs" />
+    <Compile Include="SolicitudTeletrabajoServicio.cs" />
+    <Compile Include="TipoDesplazamientoServicio.cs" />
+    <Compile Include="TipoTeletrabajadorDatos.cs" />
+    <Compile Include="UnidadTrabajoServicio.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj">

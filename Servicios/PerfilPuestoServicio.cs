@@ -27,5 +27,32 @@ namespace Servicios
         {
             return perfilPuestoDatos.getPerfilPuesto(idFuncionario);
         }
+        /// <summary>
+        /// Fabián Quirós Masís
+        /// 26/09/2018
+        /// Efecto: inserta un perfil del puesto de un funcionario
+        /// Requiere: PerfilPuesto  y el id del funcionario
+        /// Modifica: -
+        /// Devuelve: -
+        /// </summary>
+        /// <returns>-</returns>
+        public void insertarPerfilPuesto(PerfilPuesto perfilPuesto, int idFuncionario)
+        {
+            perfilPuestoDatos.insertarPerfilPuesto(perfilPuesto, idFuncionario);
+        }
+
+        /// <summary>
+        /// Fabián Quirós Masís
+        /// 26/09/2018
+        /// Efecto: actualiza de un perfil del puesto de un funcionario
+        /// Requiere: PerfilPuesto
+        /// Modifica: -
+        /// Devuelve: -
+        /// </summary>
+        /// <returns>-</returns>
+        public void actualizarPerfilPuesto(PerfilPuesto perfilPuesto, int idFuncionario)
+        {
+            perfilPuestoDatos.actualizarPerfilPuesto(perfilPuesto, idFuncionario);
+        }
     }
 }

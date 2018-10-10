@@ -14,7 +14,7 @@ namespace AccesoDatos
         private ConexionDatos conexion = new ConexionDatos();
         private BitacoraAccionesDatos bitacora = new BitacoraAccionesDatos();
         #endregion
-
+         
         /// <summary>
         /// Fabián Quirós Masís
         /// 24/09/2018
@@ -28,7 +28,7 @@ namespace AccesoDatos
         {
             PerfilPuesto perfilPuesto = new PerfilPuesto();
 
-            SqlConnection sqlconnection = conexion.conexionTeletrabajo();
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
 
             String consulta = @"SELECT teletrabajable,controles_internos,porcentaje,supervision,factibilidad_teletrabajo
                                                   ,teletrabajable_jefe,controles_internos_jefe,porcentaje_jefe,supervision_jefe
@@ -38,12 +38,12 @@ namespace AccesoDatos
                                             FROM dbo.PerfilPuesto
                                             WHERE id_funcionario = @id_funcionario and activo = @activo";
 
-            SqlCommand sqlCommand = new SqlCommand(consulta, sqlconnection);
+            SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
             sqlCommand.Parameters.AddWithValue("@id_funcionario", idFuncionario);
             sqlCommand.Parameters.AddWithValue("@activo", true);
 
             SqlDataReader reader;
-            sqlconnection.Open();
+            sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
 
          
@@ -70,9 +70,88 @@ namespace AccesoDatos
                 perfilPuesto.aprobacionRRHH = Convert.ToBoolean(reader["aprobacion_rrhh"].ToString());
             }
 
-            sqlconnection.Close();
+            sqlConnection.Close();
 
             return perfilPuesto;
+        }
+
+        /// <summary>
+        /// Fabián Quirós Masís
+        /// 26/09/2018
+        /// Efecto: inserta un perfil del puesto de un funcionario
+        /// Requiere: PerfilPuesto  y el id del funcionario
+        /// Modifica: -
+        /// Devuelve: -
+        /// </summary>
+        /// <returns>-</returns>
+        public void insertarPerfilPuesto(PerfilPuesto perfilPuesto, int idFuncionario)
+        {
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
+
+            String consulta = @"INSERT INTO dbo.PerfilPuesto
+                                               (id_funcionario,teletrabajable,controles_internos,porcentaje,supervision,factibilidad_teletrabajo
+                                               ,teletrabajable_jefe,controles_internos_jefe,porcentaje_jefe,supervision_jefe,consideraciones_puesto_jefe
+                                               ,factibilidad_teletrabajo_jefe,observaciones_jefe,resultado_teletrabajable,resultado_control_internos
+                                               ,resultado_porcentaje,resultado_supervision,resultado_factibilidad,aprobacion_rrhh,activo)
+                                           VALUES(@id_funcionario,@teletrabajable,@controles_internos,@porcentaje,@supervision,@factibilidad_teletrabajo
+                                                       @teletrabajable_jefe,@controles_internos_jefe,@porcentaje_jefe,@supervision_jefe@consideraciones_puesto_jefe,
+                                                       @factibilidad_teletrabajo_jefe,@observaciones_jefe, @resultado_teletrabajable,@resultado_control_internos,
+                                                       @resultado_porcentaje,@resultado_supervision,@resultado_factibilidad,@aprobacion_rrhh,@activo)";
+
+            SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@id_funcionario", idFuncionario);
+            sqlCommand.Parameters.AddWithValue("@teletrabajable", perfilPuesto.teletrabajable);
+            sqlCommand.Parameters.AddWithValue("@controles_internos", perfilPuesto.controlesInternos);
+            sqlCommand.Parameters.AddWithValue("@porcentaje", perfilPuesto.porcentaje);
+            sqlCommand.Parameters.AddWithValue("@supervision", perfilPuesto.supervision);
+            sqlCommand.Parameters.AddWithValue("@factibilidad_teletrabajo", perfilPuesto.factibilidadTeletrabajo);
+            sqlCommand.Parameters.AddWithValue("@teletrabajable_jefe", perfilPuesto.teletrabajable);
+            sqlCommand.Parameters.AddWithValue("@controles_internos_jefe", perfilPuesto.controlesInternos);
+            sqlCommand.Parameters.AddWithValue("@porcentaje_jefe", perfilPuesto.porcentaje);
+            sqlCommand.Parameters.AddWithValue("@supervision_jefe", perfilPuesto.supervision);
+            sqlCommand.Parameters.AddWithValue("@consideraciones_puesto_jefe", perfilPuesto.factibilidadTeletrabajo);
+            sqlCommand.Parameters.AddWithValue("@factibilidad_teletrabajo_jefe", perfilPuesto.teletrabajable);
+            sqlCommand.Parameters.AddWithValue("@resultado_teletrabajable", perfilPuesto.controlesInternos);
+            sqlCommand.Parameters.AddWithValue("@resultado_control_internos", perfilPuesto.porcentaje);
+            sqlCommand.Parameters.AddWithValue("@resultado_porcentaje", perfilPuesto.supervision);
+            sqlCommand.Parameters.AddWithValue("@resultado_supervision", perfilPuesto.factibilidadTeletrabajo);
+            sqlCommand.Parameters.AddWithValue("@resultado_factibilidad", perfilPuesto.supervision);
+            sqlCommand.Parameters.AddWithValue("@aprobacion_rrhh", perfilPuesto.factibilidadTeletrabajo);
+            sqlCommand.Parameters.AddWithValue("@activo", true);
+
+            sqlConnection.Open();
+            sqlCommand.ExecuteReader();
+            sqlConnection.Close();
+
+        }
+
+        /// <summary>
+        /// Fabián Quirós Masís
+        /// 26/09/2018
+        /// Efecto: actualiza de un perfil del puesto de un funcionario
+        /// Requiere: PerfilPuesto
+        /// Modifica: -
+        /// Devuelve: -
+        /// </summary>
+        /// <returns>-</returns>
+        public void actualizarPerfilPuesto(PerfilPuesto perfilPuesto, int idFuncionario)
+        {
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
+
+            String consulta = @"UPDATE dbo.EvaluacionAspectoSeguridad
+                                            SET activo = @activo 
+                                            WHERE  id_funcionario = @id_funcionario";
+            SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@id_funcionario", idFuncionario);
+            sqlCommand.Parameters.AddWithValue("@activo", false);
+
+            sqlConnection.Open();
+            sqlCommand.ExecuteReader();
+            sqlConnection.Close();
+
+            insertarPerfilPuesto(perfilPuesto, idFuncionario);
+
         }
     }
 }

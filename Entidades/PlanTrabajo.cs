@@ -12,11 +12,11 @@ namespace Entidades
         public DateTime fechaInicio { get; set; }
         public DateTime fechaFin { get; set; }
         public Boolean aprobacionJefe { get; set; }
-        public List<Meta> metas { get; set; }
+        public List<Objetivo> metas { get; set; }
 
         public PlanTrabajo()
         {
-            metas = new List<Meta>();
+            metas = new List<Objetivo>();
         }
     }
 }

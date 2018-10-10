@@ -52,6 +52,7 @@
     <Compile Include="Horario.cs" />
     <Compile Include="Instrumentalizacion.cs" />
     <Compile Include="Meta.cs" />
+    <Compile Include="Objetivo.cs" />
     <Compile Include="PerfilLaboral.cs" />
     <Compile Include="PerfilPuesto.cs" />
     <Compile Include="PersonaEmergencia.cs" />

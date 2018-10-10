@@ -9,6 +9,7 @@ namespace Entidades
     public class EquipoConexion
     {
         public String descripcion { get; set; }
+        public int idEquipoConexion { get; set; }
         public Boolean posee { get; set; }
 
         public EquipoConexion()

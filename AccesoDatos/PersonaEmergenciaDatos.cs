@@ -26,17 +26,17 @@ namespace AccesoDatos
         /// <returns> PersonaEmergencia </returns>
         public PersonaEmergencia getPersonaEmergencia(Funcionario funcionario)
         {
-            SqlConnection sqlconnection = conexion.conexionTeletrabajo();
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
             String consulta = @"SELECT id_persona, nombre_completo, telefono_fijo, telefono_celular, parentesco,direccion
                                               FROM dbo.PersonaEmergencia PE, dbo.ContactoEmergencia CE
                                               WHERE PE.id_persona= CE.id_persona_emergencia and CE.id_funcionario = @id_funcionario and activo = @activo";
 
-            SqlCommand sqlCommand = new SqlCommand(consulta, sqlconnection);
+            SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
             sqlCommand.Parameters.AddWithValue("@id_funcionario", funcionario.idFuncionario);
             sqlCommand.Parameters.AddWithValue("@activo", true);
 
             SqlDataReader reader;
-            sqlconnection.Open();
+            sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
 
             PersonaEmergencia personaEmergencia = new PersonaEmergencia();
@@ -50,7 +50,7 @@ namespace AccesoDatos
                 personaEmergencia.direccion = reader["direccion"].ToString();
             }
 
-            sqlconnection.Close();
+            sqlConnection.Close();
 
             return personaEmergencia;
         }
@@ -92,7 +92,8 @@ namespace AccesoDatos
             sqlCommand.Parameters.AddWithValue("@id_funcionario", contactoEmergencia.nombreCompleto);
             sqlCommand.Parameters.AddWithValue("@id_persona_emergencia", contactoEmergencia.telefonoFijo);         
             sqlCommand.Parameters.AddWithValue("@activo", true);
-
+      
+            sqlCommand.ExecuteReader();
 
             sqlConnection.Close();
 
@@ -117,7 +118,7 @@ namespace AccesoDatos
                                              WHERE  id_persona_emergencia =@id_persona  and id_funcionario = @id_funcionario
                                              UPDATE dbo.PersonaEmergencia
                                              SET activo = 0
-                                             WHERE  id_persona_emergencia =@id_persona";
+                                             WHERE  id_persona_emergencia = @id_persona";
             SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
 
             sqlCommand.Parameters.AddWithValue("@id_persona", contactoEmergencia.idPersona);
@@ -129,6 +130,8 @@ namespace AccesoDatos
             sqlConnection.Close();
 
             int idContactoActualizado = insertarPersonaEmergencia(contactoEmergencia, funcionario);
+
+            bitacora.insertarBitacoraAccion("Actualizar", "ContactoEmergencia", contactoEmergencia.idPersona, idContactoActualizado, funcionario.nombreCompleto);
 
             return idContactoActualizado;
         }
@@ -147,10 +150,10 @@ namespace AccesoDatos
 
             String consulta = @"UPDATE dbo.ContactoEmergencia
                                              SET activo = @activo
-                                             WHERE  id_persona_emergencia =@id_persona  and id_funcionario = @id_funcionario
+                                             WHERE  id_persona_emergencia = @id_persona  and id_funcionario = @id_funcionario
                                              UPDATE dbo.PersonaEmergencia
                                              SET activo = 0
-                                             WHERE  id_persona_emergencia =@id_persona";
+                                             WHERE  id_persona_emergencia = @id_persona";
             SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
 
             sqlCommand.Parameters.AddWithValue("@id_persona", contactoEmergencia.idPersona);

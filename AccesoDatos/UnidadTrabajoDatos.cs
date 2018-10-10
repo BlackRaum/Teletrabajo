@@ -30,7 +30,7 @@ namespace AccesoDatos
             SqlConnection sqlConnection = conexion.conexionLogin();
             String consulta = @"SELECT id_unidad,nombre,numero_extension,telefono,direccion
                                              FROM dbo.UnidadTrabajo
-                                             Where id_unidad = @id_unidad activo = @activo";
+                                             Where id_unidad = @id_unidad and activo = @activo";
 
             SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
             sqlCommand.Parameters.AddWithValue("@id_unidad", true);
@@ -135,7 +135,7 @@ namespace AccesoDatos
         /// Devuelve:int idContactoEmergencia
         /// </summary>
         /// <returns>int</returns>
-        public int actualizarUnidadTrabajo(UnidadTrabajo unidad)
+        public int actualizarUnidadTrabajo(UnidadTrabajo unidad, String usuario)
         {
             SqlConnection sqlConnection = conexion.conexionTeletrabajo();
 
@@ -152,9 +152,11 @@ namespace AccesoDatos
             sqlCommand.ExecuteReader();
             sqlConnection.Close();
 
-            int idContactoActualizado = insertarUnidadTrabajo(unidad);
+            int idUnidadActualizada = insertarUnidadTrabajo(unidad);
 
-            return idContactoActualizado;
+            bitacora.insertarBitacoraAccion("Actualizar", "UnidadTrabajo", unidad.idUnidad, idUnidadActualizada, usuario);
+
+            return idUnidadActualizada;
         }
 
         /// Fabián Quirós Masís
@@ -165,7 +167,7 @@ namespace AccesoDatos
         /// Devuelve:int idContactoEmergencia
         /// </summary>
         /// <returns>int</returns>
-        public void eliminarUnidadTrabajo(UnidadTrabajo unidad, Funcionario funcionario)
+        public void eliminarUnidadTrabajo(UnidadTrabajo unidad, String usuario)
         {
             SqlConnection sqlConnection = conexion.conexionTeletrabajo();
 
@@ -182,7 +184,7 @@ namespace AccesoDatos
             sqlCommand.ExecuteReader();
             sqlConnection.Close();
 
-            bitacora.insertarBitacoraAccion("Eliminar", "UnidadTrabajo", unidad.idUnidad, 0, funcionario.nombreCompleto);
+            bitacora.insertarBitacoraAccion("Eliminar", "UnidadTrabajo", unidad.idUnidad, 0, usuario);
 
         }
 

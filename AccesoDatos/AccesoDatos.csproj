@@ -44,12 +44,23 @@
     <Compile Include="AspectoSeguridadLaboralDatos.cs" />
     <Compile Include="BitacoraAccionesDatos.cs" />
     <Compile Include="ConexionDatos.cs" />
+    <Compile Include="EntregableDatos.cs" />
+    <Compile Include="EquipoConexionDatos.cs" />
+    <Compile Include="FuncionarioDatos.cs" />
+    <Compile Include="FuncionFuncionarioDatos.cs" />
+    <Compile Include="HorarioDatos.cs" />
+    <Compile Include="InstrumentalizacionDatos.cs" />
+    <Compile Include="MetaDatos.cs" />
+    <Compile Include="ObjetivoDatos.cs" />
     <Compile Include="PerfilLaboralDatos.cs" />
     <Compile Include="PerfilPuestoDatos.cs" />
     <Compile Include="PersonaEmergenciaDatos.cs" />
+    <Compile Include="PlanTrabajoDatos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PuestoTeletrabajoDatos.cs" />
     <Compile Include="SolicitudTeletrabajoDatos.cs" />
+    <Compile Include="TipoDesplazamientoDatos.cs" />
+    <Compile Include="TipoTeletrabajadorDatos.cs" />
     <Compile Include="UnidadTrabajoDatos.cs" />
   </ItemGroup>
   <ItemGroup>

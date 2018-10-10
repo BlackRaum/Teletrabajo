@@ -26,19 +26,19 @@ namespace AccesoDatos
         /// <returns> List<AspectoSeguridadLaboral> </returns>
         public AspectoSeguridadLaboral getAspectoSeguridadLaboral(int idAspecto)
         {
-            SqlConnection sqlconnection = conexion.conexionTeletrabajo();
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
 
            
             String consulta = @"SELECT id_aspecto,descripcion 
                                             FROM Teletrabajo.dbo.AspectoSeguridadLaboral
-                                            Where id_aspecto=@id_aspecto activo = @activo";
+                                            Where id_aspecto=@id_aspecto and activo = @activo";
 
-            SqlCommand sqlCommand = new SqlCommand(consulta, sqlconnection);
+            SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
             sqlCommand.Parameters.AddWithValue("@id_aspecto", idAspecto);
             sqlCommand.Parameters.AddWithValue("@activo", true);
 
             SqlDataReader reader;
-            sqlconnection.Open();
+            sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
 
             AspectoSeguridadLaboral aspectoSeguridad = new AspectoSeguridadLaboral();
@@ -48,7 +48,7 @@ namespace AccesoDatos
                 aspectoSeguridad.descripcion = reader["descripcion"].ToString();                   
             }
 
-            sqlconnection.Close();
+            sqlConnection.Close();
 
             return aspectoSeguridad;
         }
@@ -64,17 +64,17 @@ namespace AccesoDatos
         /// <returns> List<AspectoSeguridadLaboral> </returns>
         public List<AspectoSeguridadLaboral> getAspectosSeguridadLaboral()
         {
-            SqlConnection sqlconnection = conexion.conexionTeletrabajo();
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
             List<AspectoSeguridadLaboral> listaAspectos = new List<AspectoSeguridadLaboral>();
             String consulta = @"SELECT id_aspecto,descripcion 
                                             FROM Teletrabajo.dbo.AspectoSeguridadLaboral
                                             Where activo = @activo";
 
-            SqlCommand sqlCommand = new SqlCommand(consulta, sqlconnection);
+            SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
             sqlCommand.Parameters.AddWithValue("@activo", true);
 
             SqlDataReader reader;
-            sqlconnection.Open();
+            sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
 
 
@@ -89,7 +89,7 @@ namespace AccesoDatos
                 listaAspectos.Add(aspectoSeguridad);
             }
 
-            sqlconnection.Close();
+            sqlConnection.Close();
 
             return listaAspectos;
         }
@@ -133,7 +133,7 @@ namespace AccesoDatos
         /// Devuelve: int idAspecto
         /// </summary>
         /// <returns>int</returns>
-        public int actualizarAspectoSeguridadLaboral(AspectoSeguridadLaboral aspecto)
+        public int actualizarAspectoSeguridadLaboral(AspectoSeguridadLaboral aspecto, String usuario)
         {
             SqlConnection sqlConnection = conexion.conexionTeletrabajo();
 
@@ -151,6 +151,8 @@ namespace AccesoDatos
 
             int idAspecto = insertarAspectoSeguridadLaboral(aspecto);
 
+            bitacora.insertarBitacoraAccion("Actualizar", "AspectoSeguridadLaboral", aspecto.idAspecto, idAspecto, usuario);
+
             return idAspecto;
         }
 
@@ -162,7 +164,7 @@ namespace AccesoDatos
         /// Devuelve:int idContactoEmergencia
         /// </summary>
         /// <returns>-</returns>
-        public void eliminarAspectoSeguridadLaboral(AspectoSeguridadLaboral aspecto, Funcionario funcionario)
+        public void eliminarAspectoSeguridadLaboral(AspectoSeguridadLaboral aspecto, String usuario)
         {
             SqlConnection sqlConnection = conexion.conexionTeletrabajo();
 
@@ -178,7 +180,7 @@ namespace AccesoDatos
             sqlCommand.ExecuteReader();
             sqlConnection.Close();
 
-            bitacora.insertarBitacoraAccion("Eliminar", "ContactoEmergencia", aspecto.idAspecto, 0, funcionario.nombreCompleto);
+            bitacora.insertarBitacoraAccion("Eliminar", "AspectoSeguridadLaboral", aspecto.idAspecto, 0, usuario);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace AccesoDatos
         /// <returns> PuestoTeletrabajo </returns>
         public PuestoTeletrabajo getPuestoTeletrabajo(int idFuncionario)
         {
-            SqlConnection sqlconnection = conexion.conexionTeletrabajo();
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
 
             PuestoTeletrabajo puestoTeletrabajo = new PuestoTeletrabajo();
 
@@ -34,12 +34,12 @@ namespace AccesoDatos
                                             FROM dbo.PuestoTeletrabajo PT  INNER JOIN EvaluacionAspectoSeguridad ASL ON PT.id_aspecto = ASL.id_aspecto
                                             WHERE id_funcionario = @id_funcionario and PT.activo = @activo";
 
-            SqlCommand sqlCommand = new SqlCommand(consulta, sqlconnection);
+            SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
             sqlCommand.Parameters.AddWithValue("@id_funcionario", idFuncionario);
             sqlCommand.Parameters.AddWithValue("@activo", true);
 
             SqlDataReader reader;
-            sqlconnection.Open();
+            sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
 
             List<EvaluacionAspectoSeguridad> listaEvaluacionAspectos = new List<EvaluacionAspectoSeguridad>();
@@ -55,7 +55,7 @@ namespace AccesoDatos
                 listaEvaluacionAspectos.Add(evaluacionAspecto);
             }
 
-            sqlconnection.Close();
+            sqlConnection.Close();
             puestoTeletrabajo.aspectoSeguridadLaboral = listaEvaluacionAspectos;
 
             return puestoTeletrabajo;

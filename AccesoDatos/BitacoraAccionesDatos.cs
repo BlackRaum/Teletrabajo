@@ -23,7 +23,7 @@ namespace AccesoDatos
         /// <returns></returns>
         public void insertarBitacoraAccion(String accion, String tabla, int idRegistroAnterior, int idRegistroNuevo, String usuario)
         {
-            SqlConnection sqlConnection = conexion.conexionSIBO();
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
 
             SqlCommand sqlCommand = new SqlCommand("INSERT Bitacora (accion,tabla,id_registro_anterior,id_registro_nuevo,usuario,fecha_registro) " +
                                                     "values(@accion,@tabla,@idRegistroAnterior,@idRegistroNuevo,@usuario,@fechaRegistro);", sqlConnection);

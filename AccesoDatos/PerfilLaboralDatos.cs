@@ -26,7 +26,7 @@ namespace AccesoDatos
         /// <returns> PerfilLaboral </returns>
         public PerfilLaboral getPerfilLaboral(int idFuncionario)
         {
-            SqlConnection sqlconnection = conexion.conexionTeletrabajo();
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
 
             PerfilLaboral perfilFuncionario = new PerfilLaboral();
 
@@ -35,12 +35,12 @@ namespace AccesoDatos
                                            FROM dbo.PerfilLaboral
                                            WHERE id_funcionario = @id_funcionario and activo = @activo";
 
-            SqlCommand sqlCommand = new SqlCommand(consulta, sqlconnection);
+            SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
             sqlCommand.Parameters.AddWithValue("@id_funcionario", idFuncionario);
             sqlCommand.Parameters.AddWithValue("@activo", true);
 
             SqlDataReader reader;
-            sqlconnection.Open();
+            sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
 
             PerfilLaboral perfilLaboral = new PerfilLaboral();
@@ -56,7 +56,7 @@ namespace AccesoDatos
                 perfilLaboral.autoregulacion = Convert.ToBoolean(reader["aprobacion_rrhh"].ToString());
             }
 
-            sqlconnection.Close();
+            sqlConnection.Close();
 
             return perfilFuncionario;
         }
@@ -148,7 +148,7 @@ namespace AccesoDatos
             sqlCommand.ExecuteReader();
             sqlConnection.Close();
 
-            bitacora.insertarBitacoraAccion("Eliminar", "ContactoEmergencia", funcionario.idFuncionario, 0, funcionario.nombreCompleto);
+            bitacora.insertarBitacoraAccion("Eliminar", "PerfilLaboral", funcionario.idFuncionario, 0, funcionario.nombreCompleto);
 
         }
     }

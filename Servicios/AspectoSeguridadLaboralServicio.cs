@@ -64,9 +64,9 @@ namespace Servicios
         /// Devuelve: int idAspecto
         /// </summary>
         /// <returns>int</returns>
-        public int actualizarAspectoSeguridadLaboral(AspectoSeguridadLaboral aspecto)
+        public int actualizarAspectoSeguridadLaboral(AspectoSeguridadLaboral aspecto, String usuario)
         {
-            return aspectoSeguridadData.actualizarAspectoSeguridadLaboral(aspecto);
+            return aspectoSeguridadData.actualizarAspectoSeguridadLaboral(aspecto,usuario);
         }
 
         /// Fabián Quirós Masís
@@ -77,9 +77,9 @@ namespace Servicios
         /// Devuelve:int idContactoEmergencia
         /// </summary>
         /// <returns>-</returns>
-        public void eliminarAspectoSeguridadLaboral(AspectoSeguridadLaboral aspecto, Funcionario funcionario)
+        public void eliminarAspectoSeguridadLaboral(AspectoSeguridadLaboral aspecto, String usuario)
         {
-            aspectoSeguridadData.eliminarAspectoSeguridadLaboral(aspecto, funcionario);
+            aspectoSeguridadData.eliminarAspectoSeguridadLaboral(aspecto, usuario);
         }
     }
 }

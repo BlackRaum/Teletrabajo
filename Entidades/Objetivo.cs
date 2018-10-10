@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class FuncionFuncionario
+    public class Objetivo
     {
+        public int idObjetivo { get; set; }
         public String descripcion { get; set; }
-        public int idFuncion { get; set; }
-        public Boolean isTeletrabajable { get; set; }
+        public List<Meta> metas { get; set; }
 
-        public FuncionFuncionario()
+        public Objetivo()
         {
-
+            metas = new List<Meta>();
         }
     }
 }

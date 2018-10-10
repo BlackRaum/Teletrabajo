@@ -23,9 +23,9 @@ namespace Servicios
         /// Devuelve: devuelve el objeto Persona de Emergencia
         /// </summary>
         /// <returns> PersonaEmergencia </returns>
-        public PersonaEmergencia getPersonaEmergencia()
+        public PersonaEmergencia getPersonaEmergencia(Funcionario funcionario)
         {
-            return personaEmergenciaDatos.getPersonaEmergencia();
+            return personaEmergenciaDatos.getPersonaEmergencia(funcionario);
         }
 
         /// <summary>
