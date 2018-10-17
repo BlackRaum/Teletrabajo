@@ -26,18 +26,20 @@
 }
 
 .piePagina {
-    background-color: #666666;
+    background-color: #005da4;    
     min-height: 25px;
     bottom: 0;
     left: 0;
     padding: 2px;
-    position:absolute;
-    width:100%;
+    position: absolute;
+    width: 100%;
 }
 
 .menu {
-    background: #ededed;
+    background: #62C3CD;
+    border-color: #62C3CD;
 }
+
 
 .divRedondo {
     border: 2px solid #a1a1a1;

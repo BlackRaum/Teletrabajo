@@ -18,6 +18,42 @@ namespace AccesoDatos
         /// <summary>
         /// Fabián Quirós Masís
         /// 24/09/2018
+        /// Efecto: devuelve la contraseña de un usuario si se encuentra en la bd 
+        /// Requiere: usuario
+        /// Modifica: -
+        /// Devuelve: contraseña
+        /// </summary>
+        /// <returns> String </returns>
+        public String getLogin(String usuario)
+        {
+            String password = "";
+
+            SqlConnection sqlConnection = conexion.conexionTeletrabajo();
+
+            String consulta = @"SELECT contrasena     
+                                            FROM Teletrabajo.dbo.Funcionario
+                                            WHERE usuario = @usuario and activo = @activo";
+
+            SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@usuario", usuario);
+            sqlCommand.Parameters.AddWithValue("@activo", true);
+
+            SqlDataReader reader;
+            sqlConnection.Open();
+            reader = sqlCommand.ExecuteReader();
+            while (reader.Read())
+            {
+               password =reader["contrasena"].ToString();               
+            }
+
+            sqlConnection.Close();
+
+            return password;
+        }
+        
+        /// <summary>
+        /// Fabián Quirós Masís
+        /// 24/09/2018
         /// Efecto: devuelve un funcionario 
         /// Requiere: idFuncionario
         /// Modifica: -

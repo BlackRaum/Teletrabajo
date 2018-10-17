@@ -25,6 +25,7 @@ namespace Servicios
         /// <returns> SolicitudTeletrabajo </returns>
         public SolicitudTeletrabajo getSolicitudTeletrabajo(int idSolicitante)
         {
+            return solicitudTeletrabajoDatos.getSolicitudTeletrabajo(idSolicitante);
         }
 
         /// <summary>
@@ -38,6 +39,7 @@ namespace Servicios
         /// <returns> int </returns>
         public int insertarSolicitudTeletrabajo(SolicitudTeletrabajo solicitud, int idSolicitante)
         {
+            return solicitudTeletrabajoDatos.insertarSolicitudTeletrabajo(solicitud,idSolicitante);
         }
 
         /// <summary>
@@ -51,6 +53,7 @@ namespace Servicios
         /// <returns> - </returns>
         public void aprobacionSolicitudTeletrabajoJefe(SolicitudTeletrabajo solicitudTeletrabajo)
         {
+            solicitudTeletrabajoDatos.aprobacionSolicitudTeletrabajoJefe(solicitudTeletrabajo);
         }
 
         /// <summary>
@@ -64,6 +67,7 @@ namespace Servicios
         /// <returns> - </returns>
         public void aprobacionSolicitudTeletrabajoRRHH(SolicitudTeletrabajo solicitudTeletrabajo)
         {
+            solicitudTeletrabajoDatos.aprobacionSolicitudTeletrabajoRRHH(solicitudTeletrabajo);
         }
 
         /// <summary>
@@ -77,6 +81,7 @@ namespace Servicios
         /// <returns> - </returns>
         public void eliminarSolicitudTeletrabajo(SolicitudTeletrabajo solicitudTeletrabajo, String usuario)
         {
+            solicitudTeletrabajoDatos.eliminarSolicitudTeletrabajo(solicitudTeletrabajo,usuario);
         }
 
     }

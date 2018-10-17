@@ -12,6 +12,26 @@ namespace Teletrabajo
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Session["nombreCompleto"] != null)
+            {
+                username.InnerText = "Bienvenid@ " + Session["nombreCompleto"].ToString();
+
+            }
+        }
+
+        protected void BtnSalir_Click(object sender, EventArgs e)
+        {
+            Session.RemoveAll();
+            Session.Abandon();
+            Session.Clear();
+            String url = Page.ResolveUrl("~/login.aspx");
+            Response.Redirect(url);
+        }
+        public void Mensaje(string mensajes, string tipo)
+        {
+            mensaje.Text = mensajes;
+            alert.Text = tipo;
+            ScriptManager.RegisterStartupScript(this, GetType(), "oso", "Mensaje();", true);
         }
     }
 }
